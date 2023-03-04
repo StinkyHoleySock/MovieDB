@@ -9,5 +9,10 @@ interface MovieApi {
     @GET(" ")
     suspend fun getMovies(
 
-    ): Response<Movie>
+    ): Response<List<Movie>>
+
+    @GET(" ")
+    suspend fun getMoviesByQuery(
+
+    ): Response<List<Movie>>
 }

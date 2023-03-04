@@ -3,4 +3,7 @@
     <string name="no_results">Нет результатов по данному запросу</string>
     <string name="error">Произошла ошибка</string>
     <string name="poster_description">Poster of the movie</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="profile">Profile</string>
 </resources>

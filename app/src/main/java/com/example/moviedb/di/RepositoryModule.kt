@@ -1,5 +1,6 @@
 package com.example.moviedb.di
 
+import com.example.moviedb.data.repository.MovieRepository
 import com.example.moviedb.data.repository.MovieRepositoryImpl
 import dagger.Binds
 import dagger.Module
@@ -15,5 +16,5 @@ abstract class RepositoryModule {
     @Singleton
     abstract fun bindRepository(
         repositoryImpl: MovieRepositoryImpl
-    ) : MovieRepositoryImpl
+    ) : MovieRepository
 }

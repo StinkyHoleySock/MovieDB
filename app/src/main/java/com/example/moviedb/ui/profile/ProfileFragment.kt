@@ -1,4 +1,4 @@
-package com.example.moviedb.ui
+package com.example.moviedb.ui.profile
 
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding

@@ -11,10 +11,10 @@ class MovieRepositoryImpl @Inject constructor(
 ) : MovieRepository {
 
     override suspend fun getMoviesList(): Response<List<Movie>> {
-        TODO("Not yet implemented")
+        return service.getMovies()
     }
 
     override suspend fun getMoviesList(query: String): Response<List<Movie>> {
-        TODO("Not yet implemented")
+        return service.getMoviesByQuery()
     }
 }
