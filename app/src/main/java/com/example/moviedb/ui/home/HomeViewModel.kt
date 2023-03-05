@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviedb.data.repository.MovieRepositoryImpl
-import com.example.moviedb.model.Movie
+import com.example.moviedb.model.movie.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,7 +29,7 @@ class HomeViewModel @Inject constructor(
         _isLoading.value = true
         viewModelScope.launch {
             val response = repository.getMoviesList()
-            _movies.value = response.body()
+            _movies.value = response.body()?.results
             _isLoading.value = false
         }
     }

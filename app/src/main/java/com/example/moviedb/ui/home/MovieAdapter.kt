@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.moviedb.databinding.ItemMovieBinding
-import com.example.moviedb.model.Movie
+import com.example.moviedb.model.movie.Movie
 
 class MovieAdapter(
     private val movieClickListener: (movieItem: Movie) -> Unit

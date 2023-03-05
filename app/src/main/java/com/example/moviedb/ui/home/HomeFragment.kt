@@ -9,15 +9,15 @@ import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.moviedb.R
 import com.example.moviedb.databinding.FragmentHomeBinding
-import com.example.moviedb.model.Movie
+import com.example.moviedb.model.movie.Movie
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     lateinit var viewModel: HomeViewModel
     private val binding: FragmentHomeBinding by viewBinding()
     private val movieAdapter by lazy {
-        MovieAdapter() {
-            navigateToMovieDetails(it)
+        MovieAdapter() { movie ->
+            navigateToMovieDetails(movie.id)
         }
     }
 
@@ -48,8 +48,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    private fun navigateToMovieDetails(movie: Movie) {
-        val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment()
+    private fun navigateToMovieDetails(id: Int) {
+        val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(id)
         findNavController().navigate(action)
     }
 }

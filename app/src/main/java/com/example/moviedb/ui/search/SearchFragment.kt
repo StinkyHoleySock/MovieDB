@@ -7,6 +7,8 @@ import android.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.moviedb.R
@@ -18,8 +20,8 @@ class SearchFragment: Fragment(R.layout.fragment_search) {
     private val binding: FragmentSearchBinding by viewBinding()
     lateinit var viewModel: SearchViewModel
     private val searchAdapter by lazy {
-        SearchAdapter() {
-            Log.d("develop", "click: $it")
+        SearchAdapter() { movie ->
+            navigateToDetails(movie.id)
         }
     }
 
@@ -28,16 +30,14 @@ class SearchFragment: Fragment(R.layout.fragment_search) {
         viewModel = ViewModelProvider(requireActivity())[SearchViewModel::class.java]
 
         binding.rvResults.apply {
-            layoutManager = LinearLayoutManager(
+            layoutManager = GridLayoutManager(
                 context,
-                LinearLayoutManager.VERTICAL,
-                false
+                3
             )
             adapter = searchAdapter
         }
 
         viewModel.movies.observe(viewLifecycleOwner) { moviesList ->
-            Log.d("develop", "movieList: $moviesList")
             searchAdapter.setData(moviesList)
 
             if (moviesList.isEmpty()) {
@@ -55,11 +55,9 @@ class SearchFragment: Fragment(R.layout.fragment_search) {
                 binding.progressCircular.visibility = View.GONE
                 binding.rvResults.visibility = View.VISIBLE
             }
-            Log.d("develop", "${binding.rvResults.isVisible}")
         }
 
         binding.rvResults.setOnClickListener {
-            Log.d("develop", "rv click")
         }
 
         binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
@@ -72,5 +70,10 @@ class SearchFragment: Fragment(R.layout.fragment_search) {
                 return false
             }
         })
+    }
+
+    private fun navigateToDetails(id: Int) {
+        val action = SearchFragmentDirections.actionSearchFragmentToDetailsFragment(id)
+        findNavController().navigate(action)
     }
 }
