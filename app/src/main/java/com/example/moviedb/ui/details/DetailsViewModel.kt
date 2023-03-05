@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviedb.data.repository.MovieRepositoryImpl
 import com.example.moviedb.model.details.MovieDetails
+import com.example.moviedb.model.tvDetails.TvDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,10 +21,17 @@ class DetailsViewModel @Inject constructor(
     private val _movie = MutableLiveData<MovieDetails>()
     val movie: LiveData<MovieDetails> get() = _movie
 
-    fun getMovieDetails(id: Long) {
+    private val _tvs = MutableLiveData<TvDetails>()
+    val tvs: LiveData<TvDetails> get() = _tvs
+
+    fun getDetails(id: Long, isMovie: Boolean) {
         _isLoading.value = true
         viewModelScope.launch {
-            _movie.value = repository.getMovieDetails(id).body()
+            if (isMovie)
+                _movie.value = repository.getMovieDetails(id).body()
+            else
+                _tvs.value = repository.getTvDetails(id).body()
+
             _isLoading.value = false
         }
     }

@@ -1,5 +1,6 @@
 package com.example.moviedb.ui.search
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -33,6 +34,8 @@ class SearchViewModel @Inject constructor(
                 val tvResponse = repository.getTvListByQuery(query)
                 _movies.value = movieResponse.body()?.results
                 _tv.value = tvResponse.body()?.results
+                Log.d("develop", "mov: ${_movies.value}")
+                Log.d("develop", "tvs: ${_tv.value}")
             } else {
                 _movies.value = emptyList()
                 _tv.value = emptyList()

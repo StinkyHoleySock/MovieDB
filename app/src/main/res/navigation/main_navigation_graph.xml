@@ -19,6 +19,9 @@
         <argument
             android:name="id"
             app:argType="long" />
+        <argument
+            android:name="isMovie"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

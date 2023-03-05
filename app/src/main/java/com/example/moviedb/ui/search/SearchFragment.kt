@@ -1,6 +1,7 @@
 package com.example.moviedb.ui.search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -18,12 +19,12 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     lateinit var viewModel: SearchViewModel
     private val movieAdapter by lazy {
         MovieAdapter() { movie ->
-            navigateToDetails(movie.id)
+            navigateToDetails(movie.id, true)
         }
     }
     private val tvAdapter by lazy {
         TvAdapter() { tv ->
-            navigateToDetails(tv.id)
+            navigateToDetails(tv.id, false)
         }
     }
 
@@ -44,20 +45,22 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 context,
                 3
             )
-            adapter = movieAdapter
+            adapter = tvAdapter
         }
 
         viewModel.movies.observe(viewLifecycleOwner) { moviesList ->
+            binding.tvMoviesTitle.applyVisibility(moviesList.isNotEmpty())
             movieAdapter.setData(moviesList)
         }
 
         viewModel.tv.observe(viewLifecycleOwner) { tvList ->
+            binding.tvTvsTitle.applyVisibility(tvList.isNotEmpty())
             tvAdapter.setData(tvList)
         }
 
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             binding.progressCircular.applyVisibility(isLoading)
-            binding.svContainer.applyVisibility(!isLoading)
+            binding.llContainer.applyVisibility(!isLoading)
         }
 
         binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
@@ -73,8 +76,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         })
     }
 
-    private fun navigateToDetails(id: Long) {
-        val action = SearchFragmentDirections.actionSearchFragmentToDetailsFragment(id)
+    private fun navigateToDetails(id: Long, isMovie: Boolean) {
+        val action = SearchFragmentDirections.actionSearchFragmentToDetailsFragment(id, isMovie)
         findNavController().navigate(action)
     }
 }

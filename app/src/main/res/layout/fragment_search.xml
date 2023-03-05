@@ -20,26 +20,31 @@
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="48dp"
         android:layout_marginBottom="56dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search">
 
         <LinearLayout
+            android:id="@+id/ll_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_movies_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/movies" />
+                android:layout_margin="8dp"
+                android:text="@string/movies"
+                android:textSize="22sp"
+                android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_movies"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
                 android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -48,10 +53,14 @@
                 tools:listitem="@layout/item_movie" />
 
             <TextView
+                android:id="@+id/tv_tvs_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/tv" />
+                android:layout_margin="8dp"
+                android:text="@string/tv"
+                android:textSize="22sp"
+                android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_tv"
@@ -65,8 +74,8 @@
                 tools:listitem="@layout/item_movie" />
 
         </LinearLayout>
-    </ScrollView>
 
+    </ScrollView>
 
     <ProgressBar
         android:id="@+id/progress_circular"
