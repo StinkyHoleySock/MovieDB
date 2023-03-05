@@ -2,6 +2,7 @@ package com.example.moviedb.data.repository
 
 import com.example.moviedb.util.Constants
 import com.example.moviedb.data.api.MovieApi
+import com.example.moviedb.model.authorization.RequestToken
 import com.example.moviedb.model.details.MovieDetails
 import com.example.moviedb.model.movie.MovieResponse
 import retrofit2.Response
@@ -31,4 +32,22 @@ class MovieRepositoryImpl @Inject constructor(
             apiKey = Constants.API_KEY
         )
     }
+
+    override suspend fun getRequestToken(): RequestToken {
+        return service.getRequestToken(
+            apiKey = Constants.API_KEY
+        )
+    }
+
+    override suspend fun validateWithLogin(
+        username: String, password: String, requestToken: String
+    ): String {
+        return service.validateWithLogin(
+            apiKey = Constants.API_KEY,
+            username = username,
+            password = password,
+            requestToken = requestToken
+        )
+    }
+
 }
