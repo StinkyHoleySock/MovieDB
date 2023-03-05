@@ -9,9 +9,9 @@ import com.example.moviedb.util.Constants
 import com.example.moviedb.databinding.ItemMovieBinding
 import com.example.moviedb.model.movie.Movie
 
-class SearchAdapter(
+class MovieAdapter(
     private val movieClickListener: (movieItem: Movie) -> Unit
-) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
     private var list: MutableList<Movie> = mutableListOf()
 
     fun setData(data: List<Movie>) {

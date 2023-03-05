@@ -26,7 +26,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
 
-        binding.rvResults.apply {
+        binding.rvMovies.apply {
             layoutManager = GridLayoutManager(
                 context,
                 3
@@ -40,7 +40,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             binding.progressCircular.applyVisibility(isLoading)
-            binding.rvResults.applyVisibility(!isLoading)
+            binding.rvMovies.applyVisibility(!isLoading)
 
         }
     }

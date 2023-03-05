@@ -9,4 +9,6 @@
     <string name="auth">auth</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
+    <string name="movies">Movies:</string>
+    <string name="tv">TV:</string>
 </resources>

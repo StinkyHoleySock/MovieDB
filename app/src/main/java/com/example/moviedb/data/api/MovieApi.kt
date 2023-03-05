@@ -4,6 +4,7 @@ import com.example.moviedb.model.authorization.RequestToken
 import com.example.moviedb.model.details.MovieDetails
 import com.example.moviedb.model.movie.Movie
 import com.example.moviedb.model.movie.MovieResponse
+import com.example.moviedb.model.tv.TvResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -21,6 +22,12 @@ interface MovieApi {
         @Query("api_key") apiKey: String,
         @Query("query") query: String,
     ): Response<MovieResponse>
+
+    @GET("search/tv")
+    suspend fun getTvByQuery(
+        @Query("api_key") apiKey: String,
+        @Query("query") query: String,
+    ): Response<TvResponse>
 
     @GET("movie/{id}")
     suspend fun getMovieDetails(

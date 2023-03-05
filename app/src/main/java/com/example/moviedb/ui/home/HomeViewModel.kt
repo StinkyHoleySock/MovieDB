@@ -28,7 +28,7 @@ class HomeViewModel @Inject constructor(
     private fun getMoviesList() {
         _isLoading.value = true
         viewModelScope.launch {
-            val response = repository.getMoviesList()
+            val response = repository.getMoviesListByQuery()
             _movies.value = response.body()?.results
             _isLoading.value = false
         }
