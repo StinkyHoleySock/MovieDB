@@ -20,7 +20,7 @@ class DetailsViewModel @Inject constructor(
     private val _movie = MutableLiveData<MovieDetails>()
     val movie: LiveData<MovieDetails> get() = _movie
 
-    fun getMovieDetails(id: Int) {
+    fun getMovieDetails(id: Long) {
         _isLoading.value = true
         viewModelScope.launch {
             _movie.value = repository.getMovieDetails(id).body()

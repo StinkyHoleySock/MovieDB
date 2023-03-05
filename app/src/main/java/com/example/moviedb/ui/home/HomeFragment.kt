@@ -10,6 +10,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.moviedb.R
 import com.example.moviedb.databinding.FragmentHomeBinding
 import com.example.moviedb.model.movie.Movie
+import com.example.moviedb.util.applyVisibility
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -37,18 +38,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             movieAdapter.setData(moviesList)
         }
 
-        viewModel.isLoading.observe(viewLifecycleOwner) {isLoading ->
-            if (isLoading) {
-                binding.progressCircular.visibility = View.VISIBLE
-                binding.rvResults.visibility = View.INVISIBLE
-            } else {
-                binding.progressCircular.visibility = View.GONE
-                binding.rvResults.visibility = View.VISIBLE
-            }
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.progressCircular.applyVisibility(isLoading)
+            binding.rvResults.applyVisibility(!isLoading)
+
         }
     }
 
-    private fun navigateToMovieDetails(id: Int) {
+    private fun navigateToMovieDetails(id: Long) {
         val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(id)
         findNavController().navigate(action)
     }

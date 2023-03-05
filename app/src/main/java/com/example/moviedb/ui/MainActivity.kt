@@ -1,4 +1,4 @@
-package com.example.moviedb
+package com.example.moviedb.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.moviedb.R
 import com.example.moviedb.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 

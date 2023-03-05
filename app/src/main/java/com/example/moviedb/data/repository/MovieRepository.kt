@@ -11,5 +11,5 @@ interface MovieRepository {
 
     suspend fun getMoviesList(query: String): Response<MovieResponse>
 
-    suspend fun getMovieDetails(id: Int): Response<MovieDetails>
+    suspend fun getMovieDetails(id: Long): Response<MovieDetails>
 }

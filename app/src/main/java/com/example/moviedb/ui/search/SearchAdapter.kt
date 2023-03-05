@@ -4,7 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.moviedb.Constants
+import com.example.moviedb.R
+import com.example.moviedb.util.Constants
 import com.example.moviedb.databinding.ItemMovieBinding
 import com.example.moviedb.model.movie.Movie
 
@@ -34,11 +35,11 @@ class SearchAdapter(
 
         fun bind(movie: Movie) {
             with(binding) {
-                val imageLink = Constants.IMAGE_BASE_URL + movie.poster_path
                 tvMovieName.text = movie.title
 
                 Glide.with(ivMoviePoster.context)
-                    .load(imageLink)
+                    .load(Constants.IMAGE_BASE_URL + movie.poster_path)
+                    .error(R.drawable.ic_no_image)
                     .into(ivMoviePoster)
 
                 ivMoviePoster.setOnClickListener {

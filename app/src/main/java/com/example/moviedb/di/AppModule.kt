@@ -1,6 +1,6 @@
 package com.example.moviedb.di
 
-import com.example.moviedb.Constants
+import com.example.moviedb.util.Constants
 import com.example.moviedb.data.api.MovieApi
 import com.example.moviedb.data.repository.MovieRepositoryImpl
 import dagger.Module

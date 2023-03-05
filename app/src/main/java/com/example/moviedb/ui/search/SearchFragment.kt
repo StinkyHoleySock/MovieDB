@@ -14,8 +14,9 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.moviedb.R
 import com.example.moviedb.databinding.FragmentSearchBinding
 import com.example.moviedb.ui.home.MovieAdapter
+import com.example.moviedb.util.applyVisibility
 
-class SearchFragment: Fragment(R.layout.fragment_search) {
+class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private val binding: FragmentSearchBinding by viewBinding()
     lateinit var viewModel: SearchViewModel
@@ -39,25 +40,12 @@ class SearchFragment: Fragment(R.layout.fragment_search) {
 
         viewModel.movies.observe(viewLifecycleOwner) { moviesList ->
             searchAdapter.setData(moviesList)
-
-            if (moviesList.isEmpty()) {
-                binding.tvNoResults.visibility = View.VISIBLE
-            } else {
-                binding.tvNoResults.visibility = View.GONE
-            }
+            binding.tvNoResults.applyVisibility(moviesList.isEmpty())
         }
 
-        viewModel.isLoading.observe(viewLifecycleOwner) {isLoading ->
-            if (isLoading) {
-                binding.progressCircular.visibility = View.VISIBLE
-                binding.rvResults.visibility = View.GONE
-            } else {
-                binding.progressCircular.visibility = View.GONE
-                binding.rvResults.visibility = View.VISIBLE
-            }
-        }
-
-        binding.rvResults.setOnClickListener {
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.progressCircular.applyVisibility(isLoading)
+            binding.rvResults.applyVisibility(!isLoading)
         }
 
         binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
@@ -66,13 +54,14 @@ class SearchFragment: Fragment(R.layout.fragment_search) {
                 viewModel.getMoviesList(query)
                 return false
             }
+
             override fun onQueryTextChange(query: String): Boolean {
                 return false
             }
         })
     }
 
-    private fun navigateToDetails(id: Int) {
+    private fun navigateToDetails(id: Long) {
         val action = SearchFragmentDirections.actionSearchFragmentToDetailsFragment(id)
         findNavController().navigate(action)
     }
