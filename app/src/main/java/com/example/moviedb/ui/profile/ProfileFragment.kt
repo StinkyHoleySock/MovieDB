@@ -22,7 +22,8 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         val password = binding.editTextPassword.text.toString()
 
         binding.btnAuth.setOnClickListener {
-            viewModel.validateWithLogin(username, password)
+            // TODO: fix auth
+//            viewModel.validateWithLogin(username, password)
         }
 
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
