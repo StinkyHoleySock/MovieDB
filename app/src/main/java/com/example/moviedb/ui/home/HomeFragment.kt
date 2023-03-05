@@ -17,7 +17,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding: FragmentHomeBinding by viewBinding()
     private val movieAdapter by lazy {
         MovieAdapter() {
-            navigateToBooksDetails(it)
+            navigateToMovieDetails(it)
         }
     }
 
@@ -48,7 +48,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    private fun navigateToBooksDetails(movie: Movie) {
+    private fun navigateToMovieDetails(movie: Movie) {
         val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment()
         findNavController().navigate(action)
     }

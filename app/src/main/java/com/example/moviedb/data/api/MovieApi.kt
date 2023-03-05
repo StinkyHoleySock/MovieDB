@@ -1,6 +1,7 @@
 package com.example.moviedb.data.api
 
 import com.example.moviedb.model.Movie
+import com.example.moviedb.model.MovieResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -11,8 +12,9 @@ interface MovieApi {
 
     ): Response<List<Movie>>
 
-    @GET(" ")
+    @GET("search/movie")
     suspend fun getMoviesByQuery(
-
-    ): Response<List<Movie>>
+        @Query("api_key") apiKey: String,
+        @Query("query") query: String,
+    ): Response<MovieResponse>
 }

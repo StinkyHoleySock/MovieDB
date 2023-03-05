@@ -21,16 +21,12 @@ class SearchViewModel @Inject constructor(
     private val _movies = MutableLiveData<List<Movie>>()
     val movies: LiveData<List<Movie>> get() = _movies
 
-    init {
-        getMoviesList("")
-    }
-
     fun getMoviesList(query: String) {
         _isLoading.value = true
         viewModelScope.launch {
             if (query.isNotEmpty()) {
                 val response = repository.getMoviesList(query)
-                _movies.value = response.body()
+                _movies.value = response.body()?.results
             } else {
                 _movies.value = emptyList()
             }
